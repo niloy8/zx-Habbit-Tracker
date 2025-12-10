@@ -1,0 +1,32 @@
+const zx = @import("zx");
+
+pub fn Page(ctx: zx.PageContext) zx.Component {
+    return (
+        <main @allocator={ctx.arena} class="home-container">
+            <link rel="stylesheet" href="/css/home.css" />
+        
+            <section class="hero">
+                <h1 class="Joke">Welcome to My Zig App 🚀</h1>
+                <p>A fast and type-safe web experience powered by ZX.</p>
+                <a href="/about" class="primary-btn">Learn More</a>
+            </section>
+        
+            <section class="features">
+                <div class="feature-card">
+                    <h2>⚡ Fast</h2>
+                    <p>Zig + ZX gives you insane server-side performance.</p>
+                </div>
+        
+                <div class="feature-card">
+                    <h2>🔒 Safe</h2>
+                    <p>Type-safe templates and secure output escaping by default.</p>
+                </div>
+        
+                <div class="feature-card">
+                    <h2>🧩 Simple</h2>
+                    <p>Small, clean API with JSX flexibility.</p>
+                </div>
+            </section>
+        </main>
+    );
+}
