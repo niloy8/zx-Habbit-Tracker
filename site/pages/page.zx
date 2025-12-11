@@ -1,5 +1,5 @@
 const zx = @import("zx");
-const ButtonModule = @import("../components/Button.zig");
+const ButtonModule = @import("../components/Button.zx");
 
 pub fn Page(ctx: zx.PageContext) zx.Component {
     return (
@@ -8,7 +8,7 @@ pub fn Page(ctx: zx.PageContext) zx.Component {
             <link rel="stylesheet" href="/components/Button.css" />
         
             <section class="hero">
-                <h1>Welcome to Habit Tracker 🚀</h1>
+                <h1 class="hero-title">Welcome to Habit Tracker 🚀</h1>
                 <p>Build better habits, one day at a time</p>
         
                 <div class="hero-buttons">

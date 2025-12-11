@@ -12,11 +12,11 @@
     padding: 40px 20px;
 }
 
-.hero h1 {
-    font-size: 3rem;
-    color: #1f2937;
-    /* dark slate */
+.hero-title {
+    font-size: 3.5rem !important;
+    color: purple !important;
     margin-bottom: 10px;
+    font-weight: 800;
 }
 
 .hero p {
@@ -24,6 +24,14 @@
     /* gray-600 */
     font-size: 1.2rem;
     margin-bottom: 20px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
 }
 
 .primary-btn {
@@ -63,9 +71,4 @@
 .feature-card h2 {
     font-size: 1.5rem;
     margin-bottom: 10px;
-}
-
-.Joke {
-    color: purple;
-    font-size: 20px;
 }
