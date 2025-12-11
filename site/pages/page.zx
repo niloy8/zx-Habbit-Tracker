@@ -1,31 +1,96 @@
 const zx = @import("zx");
+const ButtonModule = @import("../components/Button.zig");
 
 pub fn Page(ctx: zx.PageContext) zx.Component {
     return (
         <main @allocator={ctx.arena} class="home-container">
             <link rel="stylesheet" href="/css/home.css" />
+            <link rel="stylesheet" href="/components/Button.css" />
         
             <section class="hero">
-                <h1 class="Joke">Welcome to My Zig App 🚀</h1>
-                <p>A fast and type-safe web experience powered by ZX.</p>
-                <a href="/about" class="primary-btn">Learn More</a>
+                <h1>Welcome to Habit Tracker 🚀</h1>
+                <p>Build better habits, one day at a time</p>
+        
+                <div class="hero-buttons">
+                    {(ButtonModule.Button(ctx.arena, .{
+                    .text = "Get Started",
+                    .href = "/habits",
+                    .class = "btn-primary"
+                    }))}
+                    {(ButtonModule.Button(ctx.arena, .{
+                    .text = "Learn More",
+                    .href = "/about",
+                    .class = "btn-secondary"
+                    }))}
+                </div>
             </section>
         
             <section class="features">
-                <div class="feature-card">
-                    <h2>⚡ Fast</h2>
-                    <p>Zig + ZX gives you insane server-side performance.</p>
-                </div>
+                <h2>Why Habit Tracker?</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3>Track Progress</h3>
+                        <p>Monitor your daily habits and see your streak grow over time.</p>
+                    </div>
         
-                <div class="feature-card">
-                    <h2>🔒 Safe</h2>
-                    <p>Type-safe templates and secure output escaping by default.</p>
-                </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎯</div>
+                        <h3>Set Goals</h3>
+                        <p>Define clear goals and stay motivated with visual progress indicators.</p>
+                    </div>
         
-                <div class="feature-card">
-                    <h2>🧩 Simple</h2>
-                    <p>Small, clean API with JSX flexibility.</p>
+                    <div class="feature-card">
+                        <div class="feature-icon">📈</div>
+                        <h3>View Statistics</h3>
+                        <p>Analyze your performance with detailed stats and insights.</p>
+                    </div>
+        
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3>Lightning Fast</h3>
+                        <p>Built with Zig and ZX for blazing fast server-side rendering.</p>
+                    </div>
                 </div>
+            </section>
+        
+            <section class="demo">
+                <h2>See It In Action</h2>
+                <div class="demo-cards">
+                    <div class="demo-habit-card">
+                        <div class="demo-checkbox checked"></div>
+                        <div class="demo-habit-info">
+                            <div class="demo-habit-name">Morning Exercise</div>
+                            <div class="demo-habit-streak active">🔥 7 day streak</div>
+                        </div>
+                    </div>
+        
+                    <div class="demo-habit-card">
+                        <div class="demo-checkbox checked"></div>
+                        <div class="demo-habit-info">
+                            <div class="demo-habit-name">Read 30 Minutes</div>
+                            <div class="demo-habit-streak active">🔥 14 day streak</div>
+                        </div>
+                    </div>
+        
+                    <div class="demo-habit-card">
+                        <div class="demo-checkbox"></div>
+                        <div class="demo-habit-info">
+                            <div class="demo-habit-name">Meditation</div>
+                            <div class="demo-habit-streak">Start your streak today!</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        
+            <section class="cta">
+                <h2>Ready to Build Better Habits?</h2>
+                <p>Start tracking your progress today and build the life you want.</p>
+                {(ButtonModule.Button(ctx.arena, .{
+                .text = "Start Now",
+                .href = "/habits",
+                .class = "btn-primary"
+                }))}
             </section>
         </main>
     );

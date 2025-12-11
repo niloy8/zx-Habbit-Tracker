@@ -1,15 +1,44 @@
 pub fn Layout(ctx: zx.LayoutContext, children: zx.Component) zx.Component {
     return (
-        <html @allocator={ctx.arena} lang="en-US">
+        <html @allocator={ctx.arena} lang="en">
         
         <head>
-            <title>ZX</title>
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <title>Habit Tracker - Build Better Habits</title>
+            <meta name="description"
+                content="Track your daily habits and build a better life with our fast, type-safe habit tracker built with ZX." />
             <link rel="stylesheet" href="/style.css" />
+            <link rel="stylesheet" href="/css/home.css" />
+            <link rel="stylesheet" href="/components/Button.css" />
+            <link rel="preconnect" href="https://fonts.googleapis.com" />
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+            <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+                rel="stylesheet" />
         </head>
         
         <body>
-            <h1>ZX</h1>
+            <nav class="navbar">
+                <div class="nav-container">
+                    <a href="/" class="nav-logo">
+                        <span class="logo-gradient">Habit</span>Tracker
+                    </a>
+                    <ul class="nav-menu">
+                        <li><a href="/" class="nav-link">Home</a></li>
+                        <li><a href="/habits" class="nav-link">Habits</a></li>
+                        <li><a href="/stats" class="nav-link">Statistics</a></li>
+                        <li><a href="/about" class="nav-link">About</a></li>
+                    </ul>
+                </div>
+            </nav>
+        
             {(children)}
+        
+            <footer class="footer">
+                <div class="footer-container">
+                    <p>© 2025 Habit Tracker(Niloy Bhuiyan). Built with ❤️ using ZX and Zig.</p>
+                </div>
+            </footer>
         </body>
         
         </html>
