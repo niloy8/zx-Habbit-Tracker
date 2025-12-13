@@ -1,0 +1,24 @@
+{
+  "name": "zx-habbittracker",
+  "version": "1.0.0",
+  "description": "This website is built with [ZX](https://github.com/nurulhudaapon/zx).",
+  "homepage": "https://github.com/niloy8/zx-Habbit-Tracker#readme",
+  "bugs": {
+    "url": "https://github.com/niloy8/zx-Habbit-Tracker/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/niloy8/zx-Habbit-Tracker.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@tailwindcss/cli": "^4.1.18",
+    "tailwindcss": "^4.1.18"
+  }
+}
