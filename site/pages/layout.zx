@@ -1,6 +1,11 @@
+const zx = @import("zx");
+const Footer = @import("../components/Footer.zx");
+
 pub fn Layout(ctx: zx.LayoutContext, children: zx.Component) zx.Component {
+    const allocator = ctx.arena;
+
     return (
-        <html @allocator={ctx.arena} lang="en">
+        <html @allocator={allocator} lang="en">
         
         <head>
             <meta charset="UTF-8" />
@@ -8,41 +13,85 @@ pub fn Layout(ctx: zx.LayoutContext, children: zx.Component) zx.Component {
             <title>Habit Tracker - Build Better Habits</title>
             <meta name="description"
                 content="Track your daily habits and build a better life with our fast, type-safe habit tracker built with ZX." />
-            <link rel="stylesheet" href="/style.css" />
-            <link rel="stylesheet" href="/css/home.css" />
-            <link rel="stylesheet" href="/components/Button.css" />
+            <link rel="stylesheet" href="/out.css" />
             <link rel="preconnect" href="https://fonts.googleapis.com" />
             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
             <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
                 rel="stylesheet" />
+            <script src="/habits.js"></script>
         </head>
         
-        <body>
-            <nav class="navbar">
-                <div class="nav-container">
-                    <a href="/" class="nav-logo">
-                        <span class="logo-gradient">Habit</span>Tracker
-                    </a>
-                    <ul class="nav-menu">
-                        <li><a href="/" class="nav-link">Home</a></li>
-                        <li><a href="/habits" class="nav-link">Habits</a></li>
-                        <li><a href="/stats" class="nav-link">Statistics</a></li>
-                        <li><a href="/about" class="nav-link">About</a></li>
-                    </ul>
+        <body class="bg-gray-900 text-white antialiased">
+            <nav class="sticky top-0 z-50 bg-gray-900/80 backdrop-blur-md border-b border-gray-800 shadow-lg">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex items-center justify-between h-16">
+                        <a href="/" class="flex items-center gap-2 group cursor-pointer">
+                            <div
+                                class="w-10 h-10 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <circle cx="12" cy="12" r="6" />
+                                    <circle cx="12" cy="12" r="2" />
+                                </svg>
+                            </div>
+                            <span class="text-xl font-bold">
+                                <span
+                                    class="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">Habit</span>
+                                <span class="text-white">Tracker</span>
+                            </span>
+                        </a>
+                        <ul class="hidden md:flex items-center gap-8">
+                            <li><a href="/"
+                                    class="text-gray-300 hover:text-purple-400 font-medium transition-colors cursor-pointer">Home</a>
+                            </li>
+                            <li><a href="/habits"
+                                    class="text-gray-300 hover:text-purple-400 font-medium transition-colors cursor-pointer">My
+                                    Habits</a></li>
+                            <li><a href="/stats"
+                                    class="text-gray-300 hover:text-purple-400 font-medium transition-colors cursor-pointer">Statistics</a>
+                            </li>
+                            <li><a href="/about"
+                                    class="text-gray-300 hover:text-purple-400 font-medium transition-colors cursor-pointer">About</a>
+                            </li>
+                        </ul>
+                        <a href="/habits"
+                            class="hidden md:inline-flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg font-semibold hover:shadow-lg hover:shadow-purple-500/50 transition-all duration-300 cursor-pointer">
+                            <span>Get Started</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                            </svg>
+                        </a>
+                        <button id="mobile-menu-btn"
+                            class="md:hidden p-2 text-gray-300 hover:text-purple-400 transition-colors cursor-pointer">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 6h16M4 12h16M4 18h16" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div id="mobile-menu" class="hidden md:hidden pb-4">
+                        <ul class="flex flex-col gap-2">
+                            <li><a href="/"
+                                    class="block px-4 py-2 text-gray-300 hover:bg-gray-800 hover:text-purple-400 rounded-lg transition-colors cursor-pointer">Home</a>
+                            </li>
+                            <li><a href="/habits"
+                                    class="block px-4 py-2 text-gray-300 hover:bg-gray-800 hover:text-purple-400 rounded-lg transition-colors cursor-pointer">My
+                                    Habits</a></li>
+                            <li><a href="/stats"
+                                    class="block px-4 py-2 text-gray-300 hover:bg-gray-800 hover:text-purple-400 rounded-lg transition-colors cursor-pointer">Statistics</a>
+                            </li>
+                            <li><a href="/about"
+                                    class="block px-4 py-2 text-gray-300 hover:bg-gray-800 hover:text-purple-400 rounded-lg transition-colors cursor-pointer">About</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </nav>
-        
             {(children)}
-        
-            <footer class="footer">
-                <div class="footer-container">
-                    <p>© 2025 Habit Tracker(Niloy Bhuiyan). Built with ❤️ using ZX and Zig.</p>
-                </div>
-            </footer>
+            {(Footer.Footer(allocator))}
         </body>
         
         </html>
     );
 }
-
-const zx = @import("zx");

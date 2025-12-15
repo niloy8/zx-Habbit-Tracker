@@ -1,0 +1,50 @@
+const zx = @import("zx");
+
+pub fn Footer(allocator: zx.Allocator) zx.Component {
+    return (
+        <footer @allocator={allocator}
+            class="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white border-t border-gray-700 py-12 mt-auto">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+                    <div>
+                        <h3 class="text-lg font-bold mb-4">Habit Tracker</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Build better habits, one day at a time. Track your progress and transform your life.
+                        </p>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold mb-4">Quick Links</h3>
+                        <ul class="space-y-2 text-sm">
+                            <li><a href="/" class="text-gray-400 hover:text-purple-400 transition-colors">Home</a></li>
+                            <li><a href="/habits" class="text-gray-400 hover:text-purple-400 transition-colors">My Habits</a>
+                            </li>
+                            <li><a href="/stats" class="text-gray-400 hover:text-purple-400 transition-colors">Statistics</a>
+                            </li>
+                            <li><a href="/about" class="text-gray-400 hover:text-purple-400 transition-colors">About</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold mb-4">Resources</h3>
+                        <ul class="space-y-2 text-sm">
+                            <li><a href="#" class="text-gray-400 hover:text-purple-400 transition-colors">Documentation</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-purple-400 transition-colors">Support</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-purple-400 transition-colors">Community</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold mb-4">Tech Stack</h3>
+                        <ul class="space-y-2 text-sm text-gray-400">
+                            <li>🚀 ZX Framework</li>
+                            <li>⚡ Zig Language</li>
+                            <li>🎨 Tailwind CSS</li>
+                            <li>🌐 WebAssembly</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="border-t border-gray-700 pt-8 text-center text-sm text-gray-400">
+                    <p>&copy; 2025 Habit Tracker. Built with ZX Framework - Lightning Fast.</p>
+                </div>
+            </div>
+        </footer>
+    );
+}

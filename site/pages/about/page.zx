@@ -1,12 +1,165 @@
+const zx = @import("zx");
+const icons = @import("../../components/icons.zx");
+
 pub fn Page(ctx: zx.PageContext) zx.Component {
-    const about_zx = mod.get_about_zx();
+    const allocator = ctx.arena;
+
     return (
-        <main @allocator={ctx.arena}>
-            <p>{about_zx}</p>
-            <a href="/">Back to Home</a>
+        <main @allocator={allocator} class="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black py-8">
+        
+            <div class="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12">
+                <div class="text-center mb-12">
+                    <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">About Habit Tracker</h1>
+                    <p class="text-xl text-gray-300">Built with modern technology for maximum performance</p>
+                </div>
+                <div class="bg-gray-800 rounded-2xl p-8 md:p-12 border border-gray-700 shadow-lg mb-8">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="p-3 bg-purple-900/50 rounded-lg border border-purple-700">
+                            {(icons.Target(allocator))}
+                        </div>
+                        <h2 class="text-3xl font-bold text-white">Our Mission</h2>
+                    </div>
+                    <p class="text-lg text-gray-300 leading-relaxed mb-4">
+                        We believe that building better habits is the key to personal growth and success.
+                        Habit Tracker is designed to make habit formation simple, engaging, and effective.
+                    </p>
+                    <p class="text-lg text-gray-300 leading-relaxed">
+                        By providing a clean, intuitive interface and powerful tracking features, we help you
+                        stay accountable, visualize your progress, and celebrate your wins.
+                    </p>
+                </div>
+                <div class="bg-gray-800 rounded-2xl p-8 md:p-12 border border-gray-700 shadow-lg mb-8">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="p-3 bg-blue-900/50 rounded-lg border border-blue-700">
+                            {(icons.Zap(allocator))}
+                        </div>
+                        <h2 class="text-3xl font-bold text-white">Tech Stack</h2>
+                    </div>
+        
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div
+                            class="p-6 bg-gray-900 rounded-xl border border-purple-700 hover:border-purple-500 transition-colors">
+                            <h3 class="text-xl font-bold text-white mb-3 flex items-center gap-2">
+                                <svg class="w-6 h-6 text-purple-400" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                                </svg>
+                                ZX Framework
+                            </h3>
+                            <p class="text-gray-300">
+                                Blazing-fast web framework built with Zig for server-side rendering.
+                                120x faster than Next.js!
+                            </p>
+                        </div>
+        
+                        <div class="p-6 bg-gray-900 rounded-xl border border-blue-700 hover:border-blue-500 transition-colors">
+                            <h3 class="text-xl font-bold text-white mb-3 flex items-center gap-2">
+                                <svg class="w-6 h-6 text-blue-400" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2L2 19h20L12 2z" />
+                                </svg>
+                                Zig Language
+                            </h3>
+                            <p class="text-gray-300">
+                                Modern systems programming language focused on performance, safety, and simplicity.
+                            </p>
+                        </div>
+        
+                        <div class="p-6 bg-gray-900 rounded-xl border border-cyan-700 hover:border-cyan-500 transition-colors">
+                            <h3 class="text-xl font-bold text-white mb-3 flex items-center gap-2">
+                                <svg class="w-6 h-6 text-cyan-400" fill="currentColor" viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+                                </svg>
+                                Tailwind CSS
+                            </h3>
+                            <p class="text-gray-300">
+                                Utility-first CSS framework for rapidly building custom, responsive designs.
+                            </p>
+                        </div>
+        
+                        <div
+                            class="p-6 bg-gray-900 rounded-xl border border-green-700 hover:border-green-500 transition-colors">
+                            <h3 class="text-xl font-bold text-white mb-3 flex items-center gap-2">
+                                <svg class="w-6 h-6 text-green-400" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z" />
+                                </svg>
+                                WebAssembly
+                            </h3>
+                            <p class="text-gray-300">
+                                Native performance in the browser with WASM-powered client-side interactivity.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-800 rounded-2xl p-8 md:p-12 border border-gray-700 shadow-lg mb-8">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="p-3 bg-green-900/50 rounded-lg border border-green-700">
+                            {(icons.CheckCircle(allocator))}
+                        </div>
+                        <h2 class="text-3xl font-bold text-white">Key Features</h2>
+                    </div>
+        
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0 w-6 h-6 bg-purple-600 rounded-full flex items-center justify-center mt-1">
+                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-semibold text-white mb-1">Simple & Intuitive</h3>
+                                <p class="text-gray-300">Clean interface that makes habit tracking effortless and enjoyable.</p>
+                            </div>
+                        </div>
+        
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0 w-6 h-6 bg-purple-600 rounded-full flex items-center justify-center mt-1">
+                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-semibold text-white mb-1">Real-time Updates</h3>
+                                <p class="text-gray-300">Instant feedback with WebAssembly-powered client-side rendering.</p>
+                            </div>
+                        </div>
+        
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0 w-6 h-6 bg-purple-600 rounded-full flex items-center justify-center mt-1">
+                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-semibold text-white mb-1">Beautiful Analytics</h3>
+                                <p class="text-gray-300">Visualize your progress with charts, graphs, and streak tracking.</p>
+                            </div>
+                        </div>
+        
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0 w-6 h-6 bg-purple-600 rounded-full flex items-center justify-center mt-1">
+                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-semibold text-white mb-1">Fully Responsive</h3>
+                                <p class="text-gray-300">Works seamlessly on desktop, tablet, and mobile devices.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl p-12 text-white shadow-2xl">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to Start?</h2>
+                    <p class="text-xl mb-8 text-purple-100">
+                        Begin your journey to building better habits today
+                    </p>
+                    <a href="/habits"
+                        class="inline-block px-10 py-5 bg-white text-purple-600 rounded-xl font-bold text-lg hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl cursor-pointer">
+                        Get Started Now
+                    </a>
+                </div>
+        
+            </div>
         </main>
     );
 }
-
-const mod = @import("root_mod");
-const zx = @import("zx");

@@ -1,0 +1,102 @@
+const zx = @import("zx");
+const icons = @import("../../components/icons.zx");
+
+pub fn Page(ctx: zx.PageContext) zx.Component {
+    const allocator = ctx.arena;
+
+    return (
+        <main @allocator={allocator} class="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black py-8">
+                <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+                    
+                                        <div class="mb-8">
+                                            <h1 class="text-4xl md:text-5xl font-bold text-white mb-2">My Habits</h1>
+                                            <p class="text-xl text-gray-300">Track your daily habits and build lasting streaks</p>
+                                        </div>
+                    
+
+                    
+                                        <div class="grid lg:grid-cols-3 gap-6 mb-8">
+                                            <div class="bg-gray-800 rounded-xl p-6 border border-gray-700 shadow-lg hover:border-purple-500 transition-colors">
+                                                <div class="flex items-center justify-between mb-2">
+                                                    <span class="text-gray-300">Active Habits</span>
+                                                    <span class="text-purple-400">{(icons.CheckCircle(allocator))}</span>
+                                                </div>
+                                                <div class="text-3xl font-bold text-white" id="active-count">0</div>
+                                            </div>
+                                        
+                                            <div class="bg-gray-800 rounded-xl p-6 border border-gray-700 shadow-lg hover:border-orange-500 transition-colors">
+                                                <div class="flex items-center justify-between mb-2">
+                                                    <span class="text-gray-300">Completed Today</span>
+                                                    <span class="text-orange-400">{(icons.Fire(allocator))}</span>
+                                                </div>
+                                                <div class="text-3xl font-bold text-orange-400" id="completed-count">0</div>
+                                            </div>
+                                        
+                                            <div class="bg-gray-800 rounded-xl p-6 border border-gray-700 shadow-lg hover:border-blue-500 transition-colors">
+                                                <div class="flex items-center justify-between mb-2">
+                                                    <span class="text-gray-300">Current Streak</span>
+                                                    <span class="text-blue-400">{(icons.TrendingUp(allocator))}</span>
+                                                </div>
+                                                <div class="text-3xl font-bold text-blue-400" id="current-streak">0</div>
+                                            </div>
+                                        </div>
+                    
+
+                    <div class="bg-gray-800 rounded-xl p-6 sm:p-8 border border-gray-700 shadow-lg mb-8">
+                        <div class="flex items-center justify-between mb-6">
+                            <h2 class="text-2xl font-bold text-white">Today's Habits</h2>
+                            <button onclick="document.getElementById('add-modal').classList.remove('hidden')" class="px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg font-semibold hover:shadow-lg hover:shadow-purple-500/50 transition-all duration-300 flex items-center gap-2 cursor-pointer">
+                                {(icons.Plus(allocator))}
+                                <span>Add Habit</span>
+                            </button>
+                        </div>
+
+                        <div id="habits-list" class="space-y-4">
+                            <div class="text-center py-16">
+                                <div class="w-20 h-20 bg-gray-900 rounded-full flex items-center justify-center mx-auto mb-4 border-2 border-gray-700">
+                                    <span class="text-gray-500">{(icons.Plus(allocator))}</span>
+                                </div>
+                                <h3 class="text-xl font-semibold text-gray-400 mb-2">No habits yet</h3>
+                                <p class="text-gray-500 mb-6">Start building better habits by adding your first one</p>
+                                <button onclick="document.getElementById('add-modal').classList.remove('hidden')" class="px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg font-semibold hover:shadow-lg transition-all cursor-pointer">
+                                    Create Your First Habit
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="add-modal" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
+                    <div class="bg-gray-800 rounded-2xl p-8 max-w-md w-full border border-gray-700 shadow-2xl">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-2xl font-bold text-white">Add New Habit</h3>
+                            <button onclick="document.getElementById('add-modal').classList.add('hidden')" class="p-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded-lg transition-colors cursor-pointer">
+                                {(icons.X(allocator))}
+                            </button>
+                        </div>
+
+                        <form id="habit-form" class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-300 mb-2">Habit Name</label>
+                                <input type="text" name="name" required placeholder="e.g., Morning Run" class="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 outline-none transition-all" />
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-300 mb-2">Description (Optional)</label>
+                                <textarea name="description" placeholder="Add any notes..." rows="3" class="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 outline-none transition-all resize-none"></textarea>
+                            </div>
+
+                            <div class="flex gap-3 pt-4">
+                                <button type="button" onclick="document.getElementById('add-modal').classList.add('hidden')" class="flex-1 px-4 py-3 bg-gray-700 text-white rounded-lg font-semibold hover:bg-gray-600 transition-colors cursor-pointer">
+                                    Cancel
+                                </button>
+                                <button type="submit" class="flex-1 px-4 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg font-semibold hover:shadow-lg hover:shadow-purple-500/50 transition-all cursor-pointer">
+                                    Add Habit
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </main>
+    );
+}

@@ -1,0 +1,60 @@
+const zx = @import("zx");
+const icons = @import("icons.zx");
+const std = @import("std");
+
+pub fn Sidebar(allocator: zx.Allocator, active: []const u8) zx.Component {
+    const is_home = std.mem.eql(u8, active, "home");
+    const is_habits = std.mem.eql(u8, active, "habits");
+    const is_stats = std.mem.eql(u8, active, "stats");
+    const is_about = std.mem.eql(u8, active, "about");
+
+    const home_class = if (is_home) "flex items-center gap-3 px-4 py-3 bg-gray-800 text-purple-400 rounded-lg font-medium" else "flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-purple-400 hover:bg-gray-800 rounded-lg transition-all";
+    const habits_class = if (is_habits) "flex items-center gap-3 px-4 py-3 bg-gray-800 text-purple-400 rounded-lg font-medium" else "flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-purple-400 hover:bg-gray-800 rounded-lg transition-all";
+    const stats_class = if (is_stats) "flex items-center gap-3 px-4 py-3 bg-gray-800 text-purple-400 rounded-lg font-medium" else "flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-purple-400 hover:bg-gray-800 rounded-lg transition-all";
+    const about_class = if (is_about) "flex items-center gap-3 px-4 py-3 bg-gray-800 text-purple-400 rounded-lg font-medium" else "flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-purple-400 hover:bg-gray-800 rounded-lg transition-all";
+
+    return (
+        <div @allocator={allocator}>
+            <button id="mobile-menu-button"
+                class="fixed top-4 left-4 z-50 p-2 bg-gray-800 text-white rounded-lg border border-gray-700 hover:bg-gray-700 sm:hidden cursor-pointer"
+                onclick="document.getElementById('mobile-sidebar').classList.toggle('hidden')">
+                {(icons.Menu(allocator))}
+            </button>
+        
+            <aside id="mobile-sidebar"
+                class="fixed left-0 top-0 h-full w-64 bg-gray-900 border-r border-gray-800 z-40 hidden sm:block">
+                <div class="p-6">
+                    <div class="flex items-center gap-3 mb-8">
+                        <div
+                            class="w-10 h-10 bg-gradient-to-br from-purple-600 to-blue-600 rounded-xl flex items-center justify-center">
+                            {(icons.Target(allocator))}
+                        </div>
+                        <h1 class="text-xl font-bold text-white">Habit Tracker</h1>
+                    </div>
+        
+                    <nav class="space-y-2">
+                        <a href="/" class={home_class}>
+                            {(icons.Target(allocator))}
+                            <span>Home</span>
+                        </a>
+        
+                        <a href="/habits" class={habits_class}>
+                            {(icons.CheckCircle(allocator))}
+                            <span>My Habits</span>
+                        </a>
+        
+                        <a href="/stats" class={stats_class}>
+                            {(icons.ChartBar(allocator))}
+                            <span>Statistics</span>
+                        </a>
+        
+                        <a href="/about" class={about_class}>
+                            {(icons.Zap(allocator))}
+                            <span>About</span>
+                        </a>
+                    </nav>
+                </div>
+            </aside>
+        </div>
+    );
+}
