@@ -40,10 +40,6 @@ pub fn Page(ctx: zx.PageContext) zx.Component {
                                         d="M13 7l5 5m0 0l-5 5m5-5H6" />
                                 </svg>
                             </a>
-                            <a href="/stats"
-                                class="px-8 py-4 bg-white text-gray-700 rounded-xl font-semibold border-2 border-gray-200 hover:border-purple-300 hover:bg-purple-50 transition-all duration-300 cursor-pointer">
-                                View Demo
-                            </a>
                         </div>
                     </div>
                 </div>

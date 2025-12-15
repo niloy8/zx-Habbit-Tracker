@@ -1,4 +1,5 @@
 const zx = @import("zx");
+const icons = @import("./icons.zx");
 
 pub fn Footer(allocator: zx.Allocator) zx.Component {
     return (
@@ -34,10 +35,22 @@ pub fn Footer(allocator: zx.Allocator) zx.Component {
                     <div>
                         <h3 class="text-lg font-bold mb-4">Tech Stack</h3>
                         <ul class="space-y-2 text-sm text-gray-400">
-                            <li>🚀 ZX Framework</li>
-                            <li>⚡ Zig Language</li>
-                            <li>🎨 Tailwind CSS</li>
-                            <li>🌐 WebAssembly</li>
+                            <li class="flex items-center gap-2">
+                                <span class="text-purple-400">{(icons.Zap(allocator))}</span>
+                                ZX Framework
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <span class="text-orange-400">{(icons.TrendingUp(allocator))}</span>
+                                Zig Language
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <span class="text-cyan-400">{(icons.Target(allocator))}</span>
+                                Tailwind CSS
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <span class="text-green-400">{(icons.Circle(allocator))}</span>
+                                WebAssembly
+                            </li>
                         </ul>
                     </div>
                 </div>

@@ -1,46 +1,53 @@
 const zx = @import("zx");
 const icons = @import("../../components/icons.zx");
+const handler = @import("handler.zig");
+const std = @import("std");
 
 pub fn Page(ctx: zx.PageContext) zx.Component {
     const allocator = ctx.arena;
+    const request_info = handler.handleRequest(ctx);
 
     return (
         <main @allocator={allocator} class="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black py-8">
                 <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-                    
-                                        <div class="mb-8">
-                                            <h1 class="text-4xl md:text-5xl font-bold text-white mb-2">My Habits</h1>
-                                            <p class="text-xl text-gray-300">Track your daily habits and build lasting streaks</p>
-                                        </div>
-                    
 
-                    
-                                        <div class="grid lg:grid-cols-3 gap-6 mb-8">
-                                            <div class="bg-gray-800 rounded-xl p-6 border border-gray-700 shadow-lg hover:border-purple-500 transition-colors">
-                                                <div class="flex items-center justify-between mb-2">
-                                                    <span class="text-gray-300">Active Habits</span>
-                                                    <span class="text-purple-400">{(icons.CheckCircle(allocator))}</span>
-                                                </div>
-                                                <div class="text-3xl font-bold text-white" id="active-count">0</div>
-                                            </div>
                                         
-                                            <div class="bg-gray-800 rounded-xl p-6 border border-gray-700 shadow-lg hover:border-orange-500 transition-colors">
-                                                <div class="flex items-center justify-between mb-2">
-                                                    <span class="text-gray-300">Completed Today</span>
-                                                    <span class="text-orange-400">{(icons.Fire(allocator))}</span>
-                                                </div>
-                                                <div class="text-3xl font-bold text-orange-400" id="completed-count">0</div>
-                                            </div>
+                                                                                <div class="mb-8">
+                                                                                    <h1 class="text-4xl md:text-5xl font-bold text-white mb-2">My Habits</h1>
+                                                                                    <p class="text-xl text-gray-300">Track your daily habits and build lasting streaks</p>
+                                                                                </div>
                                         
-                                            <div class="bg-gray-800 rounded-xl p-6 border border-gray-700 shadow-lg hover:border-blue-500 transition-colors">
-                                                <div class="flex items-center justify-between mb-2">
-                                                    <span class="text-gray-300">Current Streak</span>
-                                                    <span class="text-blue-400">{(icons.TrendingUp(allocator))}</span>
-                                                </div>
-                                                <div class="text-3xl font-bold text-blue-400" id="current-streak">0</div>
-                                            </div>
-                                        </div>
-                    
+
+
+
+                                        
+                                                                                <div class="grid lg:grid-cols-3 gap-6 mb-8">
+                                                                                    <div class="bg-gray-800 rounded-xl p-6 border border-gray-700 shadow-lg hover:border-purple-500 transition-colors">
+                                                                                        <div class="flex items-center justify-between mb-2">
+                                                                                            <span class="text-gray-300">Active Habits</span>
+                                                                                            <span class="text-purple-400">{(icons.CheckCircle(allocator))}</span>
+                                                                                        </div>
+                                                                                        <div class="text-3xl font-bold text-white">{[request_info.active_count:d]}</div>
+                                                                                    </div>
+                                                                                
+                                                                                    <div class="bg-gray-800 rounded-xl p-6 border border-gray-700 shadow-lg hover:border-orange-500 transition-colors">
+                                                                                        <div class="flex items-center justify-between mb-2">
+                                                                                            <span class="text-gray-300">Completed Today</span>
+                                                                                            <span class="text-orange-400">{(icons.Fire(allocator))}</span>
+                                                                                        </div>
+                                                                                        <div class="text-3xl font-bold text-orange-400">{[request_info.completed_count:d]}</div>
+                                                                                    </div>
+                                                                                
+                                                                                    <div class="bg-gray-800 rounded-xl p-6 border border-gray-700 shadow-lg hover:border-blue-500 transition-colors">
+                                                                                        <div class="flex items-center justify-between mb-2">
+                                                                                            <span class="text-gray-300">Current Streak</span>
+                                                                                            <span class="text-blue-400">{(icons.TrendingUp(allocator))}</span>
+                                                                                        </div>
+                                                                                        <div class="text-3xl font-bold text-blue-400">{[request_info.max_streak:d]}</div>
+                                                                                    </div>
+                                                                                </div>
+                                        
+
 
                     <div class="bg-gray-800 rounded-xl p-6 sm:p-8 border border-gray-700 shadow-lg mb-8">
                         <div class="flex items-center justify-between mb-6">
@@ -51,23 +58,64 @@ pub fn Page(ctx: zx.PageContext) zx.Component {
                             </button>
                         </div>
 
-                        <div id="habits-list" class="space-y-4">
-                            <div class="text-center py-16">
-                                <div class="w-20 h-20 bg-gray-900 rounded-full flex items-center justify-center mx-auto mb-4 border-2 border-gray-700">
-                                    <span class="text-gray-500">{(icons.Plus(allocator))}</span>
+                        <div class="space-y-4">
+                            {if (request_info.habits.items.len == 0) (
+                                <div class="text-center py-16">
+                                    <div class="w-20 h-20 bg-gray-900 rounded-full flex items-center justify-center mx-auto mb-4 border-2 border-gray-700">
+                                        <span class="text-gray-500">{(icons.Plus(allocator))}</span>
+                                    </div>
+                                    <h3 class="text-xl font-semibold text-gray-400 mb-2">No habits yet</h3>
+                                    <p class="text-gray-500 mb-6">Start building better habits by adding your first one</p>
+                                    <button onclick="document.getElementById('add-modal').classList.remove('hidden')" class="px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg font-semibold hover:shadow-lg transition-all cursor-pointer">
+                                        Create Your First Habit
+                                    </button>
                                 </div>
-                                <h3 class="text-xl font-semibold text-gray-400 mb-2">No habits yet</h3>
-                                <p class="text-gray-500 mb-6">Start building better habits by adding your first one</p>
-                                <button onclick="document.getElementById('add-modal').classList.remove('hidden')" class="px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg font-semibold hover:shadow-lg transition-all cursor-pointer">
-                                    Create Your First Habit
-                                </button>
-                            </div>
+                            ) else (
+                                <div>
+                                    {for (request_info.habits.items) |habit| (
+                                        <div class="bg-gray-900 rounded-xl p-6 border border-gray-700 hover:border-purple-500 transition-all mb-4">
+                                            <div class="flex items-center justify-between">
+                                                <div class="flex items-center gap-4 flex-1">
+                                                    <form method="get">
+                                                        <button type="submit" name="toggle" value={std.fmt.allocPrint(allocator, "{d}", .{habit.id}) catch @panic("OOM")} class={if (habit.completed) "w-12 h-12 rounded-full border-2 border-purple-500 bg-purple-500 transition-all flex items-center justify-center cursor-pointer" else "w-12 h-12 rounded-full border-2 border-gray-600 hover:border-purple-500 hover:bg-purple-500/20 transition-all flex items-center justify-center cursor-pointer"}>
+                                                            {if (habit.completed) (
+                                                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                                                                </svg>
+                                                            ) else (<span></span>)}
+                                                        </button>
+                                                    </form>
+                                                    <div class="flex-1">
+                                                        <h3 class="text-xl font-semibold text-white mb-1">{habit.name}</h3>
+                                                        {if (habit.description.len > 0) (<p class="text-sm text-gray-400 mb-2">{habit.description}</p>) else (<span></span>)}
+                                                        <div class="flex items-center gap-4 text-sm text-gray-400">
+                                                            <span class="flex items-center gap-1">
+                                                                <svg class="w-4 h-4 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                    <path stroke-width="2" d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z" />
+                                                                </svg>
+                                                                <span>{[habit.streak:d]} day streak</span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <form method="get">
+                                                    <button type="submit" name="delete" value={std.fmt.allocPrint(allocator, "{d}", .{habit.id}) catch @panic("OOM")} class="p-2 text-red-400 hover:bg-red-900/20 rounded-lg transition-colors cursor-pointer">
+                                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                        </svg>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>
 
-                <div id="add-modal" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
-                    <div class="bg-gray-800 rounded-2xl p-8 max-w-md w-full border border-gray-700 shadow-2xl">
+                <div id="add-modal" class="hidden fixed inset-0 bg-black/90 backdrop-blur-md flex items-center justify-center p-4" style="z-index: 99999;">
+                    <div class="bg-gray-800 rounded-2xl p-8 max-w-md w-full border border-gray-700 shadow-2xl" style="position: relative; z-index: 100000;">
                         <div class="flex items-center justify-between mb-6">
                             <h3 class="text-2xl font-bold text-white">Add New Habit</h3>
                             <button onclick="document.getElementById('add-modal').classList.add('hidden')" class="p-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded-lg transition-colors cursor-pointer">
@@ -75,7 +123,7 @@ pub fn Page(ctx: zx.PageContext) zx.Component {
                             </button>
                         </div>
 
-                        <form id="habit-form" class="space-y-4">
+                        <form method="get" class="space-y-4">
                             <div>
                                 <label class="block text-sm font-medium text-gray-300 mb-2">Habit Name</label>
                                 <input type="text" name="name" required placeholder="e.g., Morning Run" class="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 outline-none transition-all" />
