@@ -47,15 +47,12 @@ pub fn Footer(allocator: zx.Allocator) zx.Component {
                                 <span class="text-cyan-400">{(icons.Target(allocator))}</span>
                                 Tailwind CSS
                             </li>
-                            <li class="flex items-center gap-2">
-                                <span class="text-green-400">{(icons.Circle(allocator))}</span>
-                                WebAssembly
-                            </li>
+        
                         </ul>
                     </div>
                 </div>
                 <div class="border-t border-gray-700 pt-8 text-center text-sm text-gray-400">
-                    <p>&copy; 2025 Habit Tracker. Built with ZX Framework - Lightning Fast.</p>
+                    <p>copy 2025 Habit Tracker.(Niloy Bhuiyan) Built with ZX Framework - Lightning Fast.</p>
                 </div>
             </div>
         </footer>
