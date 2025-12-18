@@ -13,6 +13,7 @@ pub fn Layout(ctx: zx.LayoutContext, children: zx.Component) zx.Component {
             <title>Habit Tracker - Build Better Habits</title>
             <meta name="description"
                 content="Track your daily habits and build a better life with our fast, type-safe habit tracker built with ZX." />
+            <meta name="google-site-verification" content="EYoEZPA4W_JCzRBbCi9dUjTLjp0YC-wHN6LtAo8bgto" />
             <link rel="stylesheet" href="/out.css" />
             <link rel="preconnect" href="https://fonts.googleapis.com" />
             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
